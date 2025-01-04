@@ -1,0 +1,143 @@
+.checked {
+    text-decoration: line-through;
+}
+
+.todoItem {
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  
+}
+
+.todoItem:hover {
+  background-color: #f1f1f1;
+}
+
+.todoItem input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.checked {
+  text-decoration: line-through;
+  color: #888;
+}
+
+button {
+  background-color: #692dcf;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-left: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #4c628bf1;
+}
+
+button:focus {
+  outline: none;
+}
+
+button:disabled {
+  background-color: #f2f2f2;
+  cursor: not-allowed;
+}
+
+input[type="text"] {
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #4b9af3;
+}
+
+.editSection {
+  display: flex;
+  align-items: center;
+}
+
+.editSection input[type="text"] {
+  margin-right: 10px;
+}
+
+.editSection button {
+  margin-left: 5px;
+}
+.todoItemText {
+    max-height: 100px;
+    overflow:auto; 
+  }
+
+
+.priorityWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: 10px;
+}
+
+.priorityLabel {
+  font-size: 10px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+select {
+  padding: 5px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  width: 120px;
+}
+
+select:hover {
+  border-color: #4b9af3;
+}
+
+select:focus {
+  outline: none;
+  border-color: #4b9af3;
+}
+
+select option {
+  padding: 5px;
+  font-size: 14px;
+}
+
+option[value="high"] {
+  background-color: #ff5c5c;
+  color: white;
+}
+
+option[value="medium"] {
+  background-color: #ffd700;
+  color: white;
+}
+
+option[value="low"] {
+  background-color: #28a745;
+  color: white;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+}

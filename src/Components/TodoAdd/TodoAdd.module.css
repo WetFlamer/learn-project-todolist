@@ -1,0 +1,47 @@
+.inputSpace {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .todoAddForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .todoAddForm input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 80%;
+    margin-right: 10px;
+  }
+  
+  .todoAddForm button {
+    padding: 10px 20px;
+    background-color: #692dcf;
+    color: rgb(255, 255, 255);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .todoAddForm button:hover {
+    background-color: #4c628bf1;
+  }
+  
+  .todoList {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .todoList ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
