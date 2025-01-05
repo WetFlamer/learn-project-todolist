@@ -1,11 +1,8 @@
 import React, { useState } from "react";
 import styles from "./TodoAdd.module.css";
+import { Todo } from "../Interfaces/TodoInterfaces";
 
-interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
-}
+
 interface TodoListProps {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>; 
@@ -15,13 +12,13 @@ const TodoAdd: React.FC<TodoListProps> = ({ todos, setTodos }) => {
 
   const changeValue = (e:React.ChangeEvent<HTMLInputElement> ) => {
     setTodoTitle(e.target.value);
-    console.log(e);
   };
   const addTodo = (title: string) => {
     setTodos(() => {
-      return [{ id: Date.now(), title, completed: false }, ...todos]; 
+      return [{ id: Date.now(), title, completed: false, priority: 'low' }, ...todos]; 
     });
     setTodoTitle(""); 
+    console.log(todos)
   };
   return (
     <div className={styles.todoAddForm}>

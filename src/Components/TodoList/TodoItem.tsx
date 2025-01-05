@@ -1,39 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./TodoList.module.css";
-
-interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
-}
-
-interface TodoItemProps {
-  todo: Todo;
-  editingId: number | null;
-  editValue: string;
-  setEditValue: React.Dispatch<React.SetStateAction<string>>;
-  setEditingId: React.Dispatch<React.SetStateAction<number | null>>;
-  saveEdit: () => void;
-  cancelEdit: () => void;
-  deleteTodo: (id: number) => void;
-  checkboxTodo: (id: number) => void;
-  startingEdit: (id: number, currentTitle: string) => void;
-}
+import { TodoItemProps } from "../Interfaces/TodoInterfaces";
+import { PriorityComponent } from "../PriorityComponent/PriorityComponent";
 
 export const TodoItem: React.FC<TodoItemProps> = ({
   todo,
+  todoId,
   editingId,
   editValue,
   setEditValue,
   saveEdit,
+  setTodos,
   cancelEdit,
   deleteTodo,
   checkboxTodo,
   startingEdit,
 }) => {
-  const [priorityFilter, setPriorityFilter] = useState<priorityFilteres>(
-    priorityFilteres.Low
-  );
+  const [priorityValue, setPriorityValue] = React.useState<string>(todo.priority);
+
   return (
     <li className={styles.todoItem} key={todo.id}>
       {editingId === todo.id ? (
@@ -65,31 +49,15 @@ export const TodoItem: React.FC<TodoItemProps> = ({
             <button onClick={() => startingEdit(todo.id, todo.title)}>
               Редактировать
             </button>
-            <div className={styles.priorityWrapper}>
-              <label htmlFor="priority" className={styles.priorityLabel}>
-                Приоритет
-              </label>
-              <select
-                id="priority"
-                value={priorityFilter}
-                onChange={(e) =>
-                  setPriorityFilter(e.target.value as priorityFilteres)
-                }
-              >
-                <option value={priorityFilteres.High}>Высокий</option>
-                <option value={priorityFilteres.Medium}>Средний</option>
-                <option value={priorityFilteres.Low}>Низкий</option>
-              </select>
-            </div>
+            <PriorityComponent
+              setTodos={setTodos}
+              todoId={todoId}
+              priorityValue={priorityValue}
+              setPriorityValue={setPriorityValue}
+            />
           </div>
         </>
       )}
     </li>
   );
 };
-
-export enum priorityFilteres {
-  High = "high",
-  Medium = "medium",
-  Low = "low",
-}

@@ -1,23 +1,12 @@
 import React from "react";
 import styles from "./TodoList.module.css";
-import {TodoItem} from "./TodoItem";
-import { FilterStatuses } from "../../App";
+import { TodoItem } from "./TodoItem";
+import { FilterStatuses, PriorityFilter } from "../TaskFilter/TaskFilter";
+import { Todo, TodoListProps } from "../Interfaces/TodoInterfaces";
 
-interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
-}
-interface TodoListProps {
-  todos: Todo[];
-  filter: string;
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-}
-
-const TodoList: React.FC<TodoListProps> = ({ todos, setTodos, filter }) => {
+const TodoList: React.FC<TodoListProps> = ({ todos, setTodos, priorityFilter, filter }) => {
   const [editingId, setEditingId] = React.useState<number | null>(null);
   const [editValue, setEditValue] = React.useState<string>("");
-
   const startingEdit = (id: number, currentTitle: string) => {
     setEditingId(id);
     setEditValue(currentTitle);
@@ -47,28 +36,39 @@ const TodoList: React.FC<TodoListProps> = ({ todos, setTodos, filter }) => {
     );
   };
   const filteredTasks = todos.filter((todo) => {
-    if (filter === FilterStatuses.Completed) return todo.completed;
-    if (filter === FilterStatuses.NotCompleted) return !todo.completed;
+    const matchesStatus =
+      filter === FilterStatuses.All ||
+      (filter === FilterStatuses.Completed && todo.completed) ||
+      (filter === FilterStatuses.NotCompleted && !todo.completed);
+  
+    const matchesPriority =
+      priorityFilter === PriorityFilter.Low || todo.priority === priorityFilter;
+  
+    return matchesStatus && matchesPriority;
   });
+  
   return (
     <>
-      <ul className={styles.listSpace}>
-        {(filter === FilterStatuses.All ? todos : filteredTasks).map((todo) => (
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            editingId={editingId}
-            editValue={editValue}
-            setEditValue={setEditValue}
-            setEditingId={setEditingId}
-            saveEdit={saveEdit}
-            cancelEdit={cancelEdit}
-            deleteTodo={deleteTodo}
-            checkboxTodo={checkboxTodo}
-            startingEdit={startingEdit}
-          />
-        ))}
-      </ul>
+    <ul className={styles.listSpace}>
+  {filteredTasks.map((todo) => (
+    <TodoItem
+      key={todo.id}
+      todo={todo}
+      todoId={todo.id}
+      editingId={editingId}
+      editValue={editValue}
+      setTodos={setTodos}
+      setEditValue={setEditValue}
+      setEditingId={setEditingId}
+      saveEdit={saveEdit}
+      cancelEdit={cancelEdit}
+      deleteTodo={deleteTodo}
+      checkboxTodo={checkboxTodo}
+      startingEdit={startingEdit}
+    />
+  ))}
+</ul>
+
     </>
   );
 };

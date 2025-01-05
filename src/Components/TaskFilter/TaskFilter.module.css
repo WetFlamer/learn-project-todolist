@@ -1,0 +1,6 @@
+.filtersSection {
+   display: flex;
+   width: 460px;
+   justify-content: space-around;
+   align-items: center;
+}
