@@ -16,7 +16,9 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   checkboxTodo,
   startingEdit,
 }) => {
-  const [priorityValue, setPriorityValue] = React.useState<string>(todo.priority);
+  const [priorityValue, setPriorityValue] = React.useState<string>(
+    todo.priority
+  );
 
   return (
     <li className={styles.todoItem} key={todo.id}>

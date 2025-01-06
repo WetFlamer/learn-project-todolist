@@ -11,30 +11,35 @@ import {
 export function App() {
   const [todos, setTodos] = useState([
     {
+      date: 2,
       id: 1,
       title: "Купить чипсы",
       completed: false,
       priority: "low",
     },
     {
+      date: 2,
       id: 2,
       title: "Купить пк",
       completed: false,
       priority: "high",
     },
     {
+      date: 1736183691981,
       id: 3,
       title: "Купить йогурт",
       completed: false,
       priority: "low",
     },
     {
+      date: 4,
       id: 4,
       title: "Купить гречку",
       completed: false,
       priority: "low",
     },
     {
+      date: 3,
       id: 5,
       title: "Купить чай",
       completed: false,
