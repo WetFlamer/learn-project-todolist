@@ -9,7 +9,6 @@ export const TaskFilter: React.FC<filtersProps> = ({
   priorityFilter,
   filter,
 }) => {
-
   return (
     <>
       <div className={styles.filtersSection}>
@@ -19,14 +18,14 @@ export const TaskFilter: React.FC<filtersProps> = ({
           value={filter}
           onChange={(e) => setFilter(e.target.value as FilterStatuses)}
         >
-          <option value={FilterStatuses.All}>Все</option>
-          <option value={FilterStatuses.Alphabet}>По алфавиту</option>
-          <option value={FilterStatuses.Date}>По дате публикации</option>
-          <option value={FilterStatuses.CompletedDate}>
+          <option value={FilterStatuses.ALL}>Все</option>
+          <option value={FilterStatuses.ALPHABET}>По алфавиту</option>
+          <option value={FilterStatuses.DATE}>По дате публикации</option>
+          <option value={FilterStatuses.COMPLETED_DATE}>
             По дате выполнения
           </option>
-          <option value={FilterStatuses.Completed}>Выполненные</option>
-          <option value={FilterStatuses.NotCompleted}>Невыполненные</option>
+          <option value={FilterStatuses.COMPLETED}>Выполненные</option>
+          <option value={FilterStatuses.NOT_COMPLETED}>Невыполненные</option>
         </select>
         <label htmlFor="priorityFilter">Приоритет:</label>
         <select
@@ -34,9 +33,10 @@ export const TaskFilter: React.FC<filtersProps> = ({
           value={priorityFilter}
           onChange={(e) => setPriorityFilter(e.target.value as PriorityFilter)}
         >
-          <option value={PriorityFilter.High}>Высокий</option>
-          <option value={PriorityFilter.Medium}>Средний</option>
-          <option value={PriorityFilter.Low}>Низкий</option>
+          <option value={FilterStatuses.ALL}>Все</option>
+          <option value={PriorityFilter.HIGH}>Высокий</option>
+          <option value={PriorityFilter.MEDIUM}>Средний</option>
+          <option value={PriorityFilter.LOW}>Низкий</option>
         </select>
       </div>
     </>

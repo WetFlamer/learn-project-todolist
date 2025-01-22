@@ -1,3 +1,5 @@
+import { FilterStatuses } from "../TaskFilter/Filters";
+
 export interface Todo {
   date: number;
   id: number;
@@ -8,7 +10,7 @@ export interface Todo {
 }
 export interface TodoListProps {
   todos: Todo[];
-  filter: string;
+  filter: FilterStatuses;
   priorityFilter: string;
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }

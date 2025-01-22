@@ -33,31 +33,29 @@ const TodoList: React.FC<TodoListProps> = ({
     setTodos((prevTodos: Todo[]) => prevTodos.filter((todo) => todo.id !== id));
   };
 
-
   const filteredTasks = todos
     .filter((todo) => {
-      const matchesStatus =
-        filter === FilterStatuses.All ||
-        filter === FilterStatuses.Alphabet ||
-        filter === FilterStatuses.Date ||
-        filter === FilterStatuses.CompletedDate ||
-        (filter === FilterStatuses.Completed && todo.completed) ||
-        (filter === FilterStatuses.NotCompleted && !todo.completed);
-
-      const matchesPriority =
-        priorityFilter === PriorityFilter.Low ||
+      let matchesStatus: boolean = true;
+      if (filter === FilterStatuses.COMPLETED && !todo.completed) {
+        matchesStatus = false;
+      }
+      if (filter === FilterStatuses.NOT_COMPLETED && todo.completed) {
+        matchesStatus = false;
+      }
+      const matchesPriority: boolean =
+        priorityFilter === PriorityFilter.ALL ||
         todo.priority === priorityFilter;
 
       return matchesStatus && matchesPriority;
     })
     .sort((a, b) => {
-      if (filter === FilterStatuses.Alphabet) {
+      if (filter === FilterStatuses.ALPHABET) {
         return a.title.localeCompare(b.title);
       }
-      if (filter === FilterStatuses.Date) {
+      if (filter === FilterStatuses.DATE) {
         return b.date - a.date;
       }
-      if (filter === FilterStatuses.CompletedDate) {
+      if (filter === FilterStatuses.COMPLETED_DATE) {
         return b.completeDate - a.completeDate;
       }
       return 0;

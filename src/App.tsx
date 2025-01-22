@@ -53,9 +53,9 @@ export function App() {
     },
   ]);
 
-  const [filter, setFilter] = useState<FilterStatuses>(FilterStatuses.All);
+  const [filter, setFilter] = useState<FilterStatuses>(FilterStatuses.ALL);
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>(
-    PriorityFilter.Low
+    PriorityFilter.ALL
   );
   return (
     <>
