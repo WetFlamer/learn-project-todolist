@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./TodoList.module.css";
 import { TodoItem } from "./TodoItem";
-import { FilterStatuses, PriorityFilter } from "../TaskFilter/TaskFilter";
 import { Todo, TodoListProps } from "../Interfaces/TodoInterfaces";
+import { FilterStatuses, PriorityFilter } from "../TaskFilter/Filters";
 
 const TodoList: React.FC<TodoListProps> = ({
   todos,
@@ -33,19 +33,14 @@ const TodoList: React.FC<TodoListProps> = ({
     setTodos((prevTodos: Todo[]) => prevTodos.filter((todo) => todo.id !== id));
   };
 
-  const checkboxTodo = (id: number) => {
-    setTodos((prevTodos: Todo[]) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      )
-    );
-  };
+
   const filteredTasks = todos
     .filter((todo) => {
       const matchesStatus =
         filter === FilterStatuses.All ||
         filter === FilterStatuses.Alphabet ||
         filter === FilterStatuses.Date ||
+        filter === FilterStatuses.CompletedDate ||
         (filter === FilterStatuses.Completed && todo.completed) ||
         (filter === FilterStatuses.NotCompleted && !todo.completed);
 
@@ -62,11 +57,15 @@ const TodoList: React.FC<TodoListProps> = ({
       if (filter === FilterStatuses.Date) {
         return b.date - a.date;
       }
+      if (filter === FilterStatuses.CompletedDate) {
+        return b.completeDate - a.completeDate;
+      }
       return 0;
     });
   return (
     <>
       <ul className={styles.listSpace}>
+        {filteredTasks.length === 0 && <h3>Задач нет</h3>}
         {filteredTasks.map((todo) => (
           <TodoItem
             key={todo.id}
@@ -80,7 +79,6 @@ const TodoList: React.FC<TodoListProps> = ({
             saveEdit={saveEdit}
             cancelEdit={cancelEdit}
             deleteTodo={deleteTodo}
-            checkboxTodo={checkboxTodo}
             startingEdit={startingEdit}
           />
         ))}

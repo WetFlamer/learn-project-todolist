@@ -21,6 +21,7 @@ const TodoAdd: React.FC<TodoListProps> = ({ todos, setTodos }) => {
             title,
             completed: false,
             priority: "low",
+            completeDate: 0,
           },
           ...todos,
         ];

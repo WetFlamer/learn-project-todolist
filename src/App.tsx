@@ -6,8 +6,9 @@ import Header from "./Components/Header/Header";
 import {
   FilterStatuses,
   PriorityFilter,
-  TaskFilter,
-} from "./Components/TaskFilter/TaskFilter";
+} from "./Components/TaskFilter/Filters";
+import { TaskFilter } from "./Components/TaskFilter/TaskFilter";
+
 export function App() {
   const [todos, setTodos] = useState([
     {
@@ -16,6 +17,7 @@ export function App() {
       title: "Купить чипсы",
       completed: false,
       priority: "low",
+      completeDate: 0,
     },
     {
       date: 2,
@@ -23,6 +25,7 @@ export function App() {
       title: "Купить пк",
       completed: false,
       priority: "high",
+      completeDate: 0,
     },
     {
       date: 1736183691981,
@@ -30,6 +33,7 @@ export function App() {
       title: "Купить йогурт",
       completed: false,
       priority: "low",
+      completeDate: 0,
     },
     {
       date: 4,
@@ -37,6 +41,7 @@ export function App() {
       title: "Купить гречку",
       completed: false,
       priority: "low",
+      completeDate: 0,
     },
     {
       date: 3,
@@ -44,6 +49,7 @@ export function App() {
       title: "Купить чай",
       completed: false,
       priority: "low",
+      completeDate: 0,
     },
   ]);
 
@@ -61,9 +67,9 @@ export function App() {
           priorityFilter={priorityFilter}
           setPriorityFilter={setPriorityFilter}
           filter={filter}
+          todos={todos}
           setFilter={setFilter}
         />
-        {todos.length === 0 ? <h3>Задач нет</h3> : null}
         <TodoList
           priorityFilter={priorityFilter}
           filter={filter}

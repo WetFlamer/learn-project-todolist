@@ -4,6 +4,7 @@ export interface Todo {
   title: string;
   completed: boolean;
   priority: string;
+  completeDate: number;
 }
 export interface TodoListProps {
   todos: Todo[];
@@ -23,12 +24,5 @@ export interface TodoItemProps {
   cancelEdit: () => void;
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   deleteTodo: (id: number) => void;
-  checkboxTodo: (id: number) => void;
   startingEdit: (id: number, currentTitle: string) => void;
-}
-export interface priorityFilterProps {
-  priorityValue: string;
-  todoId: number;
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
-  setPriorityValue: React.Dispatch<React.SetStateAction<string>>;
 }

@@ -140,4 +140,8 @@ input[type="text"]:focus {
     display: flex;
     align-items: center;
   }
-  
+  .completedTime {
+    font-weight: bold;
+
+    font-size: 10.4px;
+  }
