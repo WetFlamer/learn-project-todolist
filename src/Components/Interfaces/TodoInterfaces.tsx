@@ -10,7 +10,7 @@ export interface Todo {
 }
 export interface TodoListProps {
   todos: Todo[];
-  filter: SortStatuses;
+  sort: SortStatuses;
   priorityFilter: string;
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
@@ -22,11 +22,9 @@ export interface priorityFilterProps {
 }
 export interface TodoItemProps {
   todo: Todo;
-  priorityValue: PriorityFilter;
   editingId: number | null;
   editValue: string;
   todoId: number;
-  setPriorityValue: React.Dispatch<React.SetStateAction<PriorityFilter>>; 
   setEditValue: React.Dispatch<React.SetStateAction<string>>;
   setEditingId: React.Dispatch<React.SetStateAction<number | null>>;
   saveEdit: () => void;

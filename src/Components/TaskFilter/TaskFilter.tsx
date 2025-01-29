@@ -4,19 +4,19 @@ import styles from "./TaskFilter.module.css";
 import { SortStatuses, PriorityFilter } from "./Filters";
 
 export const TaskFilter: React.FC<filtersProps> = ({
-  setFilter,
+  setSort,
   setPriorityFilter,
   priorityFilter,
-  filter,
+  sort,
 }) => {
   return (
     <>
       <div className={styles.filtersSection}>
-        <label htmlFor="filter">Сортировка по:</label>
+        <label htmlFor="sort">Сортировка по:</label>
         <select
-          id="filter"
-          value={filter}
-          onChange={(e) => setFilter(e.target.value as SortStatuses)}
+          id="sort"
+          value={sort}
+          onChange={(e) => setSort(e.target.value as SortStatuses)}
         >
           <option value={SortStatuses.ALL}>Все</option>
           <option value={SortStatuses.ALPHABET}>По алфавиту</option>
@@ -27,6 +27,7 @@ export const TaskFilter: React.FC<filtersProps> = ({
           <option value={SortStatuses.COMPLETED}>Выполненные</option>
           <option value={SortStatuses.NOT_COMPLETED}>Невыполненные</option>
         </select>
+        
         <label htmlFor="priorityFilter">Приоритет:</label>
         <select
           id="priorityFilter"

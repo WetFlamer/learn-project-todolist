@@ -14,12 +14,12 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   setTodos,
   cancelEdit,
   deleteTodo,
+
   startingEdit,
 }) => {
   const [priorityValue, setPriorityValue] = React.useState<PriorityFilter>(
     todo.priority as PriorityFilter
   );
-
   const checkboxTodo = (id: number) => {
     setTodos((prevTodos: Todo[]) =>
       prevTodos.map((todo) =>

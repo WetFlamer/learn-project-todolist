@@ -53,7 +53,7 @@ export function App() {
     },
   ]);
 
-  const [filter, setFilter] = useState<SortStatuses>(SortStatuses.ALL);
+  const [sort, setSort] = useState<SortStatuses>(SortStatuses.ALL);
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>(
     PriorityFilter.ALL
   );
@@ -66,13 +66,13 @@ export function App() {
         <TaskFilter
           priorityFilter={priorityFilter}
           setPriorityFilter={setPriorityFilter}
-          filter={filter}
+          sort={sort}
           todos={todos}
-          setFilter={setFilter}
+          setSort={setSort}
         />
         <TodoList
           priorityFilter={priorityFilter}
-          filter={filter}
+          sort={sort}
           setTodos={setTodos}
           todos={todos}
         />

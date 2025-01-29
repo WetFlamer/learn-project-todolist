@@ -8,7 +8,7 @@ const TodoList: React.FC<TodoListProps> = ({
   todos,
   setTodos,
   priorityFilter,
-  filter,
+  sort,
 }) => {
   const [editingId, setEditingId] = React.useState<number | null>(null);
   const [editValue, setEditValue] = React.useState<string>("");
@@ -36,10 +36,10 @@ const TodoList: React.FC<TodoListProps> = ({
   const filteredTasks = todos
     .filter((todo) => {
       let matchesStatus: boolean = true;
-      if (filter === SortStatuses.COMPLETED && !todo.completed) {
+      if (sort === SortStatuses.COMPLETED && !todo.completed) {
         matchesStatus = false;
       }
-      if (filter === SortStatuses.NOT_COMPLETED && todo.completed) {
+      if (sort === SortStatuses.NOT_COMPLETED && todo.completed) {
         matchesStatus = false;
       }
       const matchesPriority: boolean =
@@ -49,13 +49,13 @@ const TodoList: React.FC<TodoListProps> = ({
       return matchesStatus && matchesPriority;
     })
     .sort((a, b) => {
-      if (filter === SortStatuses.ALPHABET) {
+      if (sort === SortStatuses.ALPHABET) {
         return a.title.localeCompare(b.title);
       }
-      if (filter === SortStatuses.DATE) {
+      if (sort === SortStatuses.DATE) {
         return b.date - a.date;
       }
-      if (filter === SortStatuses.COMPLETED_DATE) {
+      if (sort === SortStatuses.COMPLETED_DATE) {
         return b.completeDate - a.completeDate;
       }
       return 0;
