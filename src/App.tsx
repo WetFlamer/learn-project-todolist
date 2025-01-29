@@ -4,7 +4,7 @@ import TodoList from "./Components/TodoList/TodoList";
 import TodoAdd from "./Components/TodoAdd/TodoAdd";
 import Header from "./Components/Header/Header";
 import {
-  FilterStatuses,
+  SortStatuses,
   PriorityFilter,
 } from "./Components/TaskFilter/Filters";
 import { TaskFilter } from "./Components/TaskFilter/TaskFilter";
@@ -53,7 +53,7 @@ export function App() {
     },
   ]);
 
-  const [filter, setFilter] = useState<FilterStatuses>(FilterStatuses.ALL);
+  const [filter, setFilter] = useState<SortStatuses>(SortStatuses.ALL);
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>(
     PriorityFilter.ALL
   );

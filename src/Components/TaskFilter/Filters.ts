@@ -1,4 +1,4 @@
-export enum FilterStatuses {
+export enum SortStatuses {
     ALL = "all",
     ALPHABET = "alphabet",
     DATE = 'date',
@@ -6,6 +6,7 @@ export enum FilterStatuses {
     COMPLETED = "completed",
     NOT_COMPLETED = "notCompleted",
   }
+
   export enum PriorityFilter {
     ALL = "all",
     HIGH = "high",

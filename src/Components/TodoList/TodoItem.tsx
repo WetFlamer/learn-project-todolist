@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./TodoList.module.css";
 import { Todo, TodoItemProps } from "../Interfaces/TodoInterfaces";
 import { PriorityComponent } from "../PriorityComponent/PriorityComponent";
+import { PriorityFilter } from "../TaskFilter/Filters";
 
 export const TodoItem: React.FC<TodoItemProps> = ({
   todo,
@@ -15,9 +16,10 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   deleteTodo,
   startingEdit,
 }) => {
-  const [priorityValue, setPriorityValue] = React.useState<string>(
-    todo.priority
+  const [priorityValue, setPriorityValue] = React.useState<PriorityFilter>(
+    todo.priority as PriorityFilter
   );
+
   const checkboxTodo = (id: number) => {
     setTodos((prevTodos: Todo[]) =>
       prevTodos.map((todo) =>
@@ -52,9 +54,11 @@ export const TodoItem: React.FC<TodoItemProps> = ({
               onChange={() => checkboxTodo(todo.id)}
             />
             {todo.title}
-            <p className={styles.completedTime}>{todo.completed
-              ? new Date(todo.completeDate).toLocaleString()
-              : null}</p>
+            <p className={styles.completedTime}>
+              {todo.completed
+                ? new Date(todo.completeDate).toLocaleString()
+                : null}
+            </p>
           </div>
           <div className={styles.actions}>
             <button onClick={() => deleteTodo(todo.id)}>Удалить</button>

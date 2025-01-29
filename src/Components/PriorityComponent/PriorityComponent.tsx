@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../TodoList/TodoList.module.css";
 import { priorityFilterProps, Todo } from "../Interfaces/TodoInterfaces";
+import { PriorityFilter } from "../TaskFilter/Filters";
 
 export const PriorityComponent: React.FC<priorityFilterProps> = ({
   priorityValue,
@@ -9,7 +10,7 @@ export const PriorityComponent: React.FC<priorityFilterProps> = ({
   setPriorityValue,
 }) => {
   const changePriorityValue = (newPriority: string) => {
-    setPriorityValue(newPriority);
+    setPriorityValue(newPriority as PriorityFilter);
     setTodos((prevTodos: Todo[]) =>
       prevTodos.map((todo) =>
         todo.id === todoId ? { ...todo, priority: newPriority } : todo

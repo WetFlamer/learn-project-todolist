@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./TodoList.module.css";
 import { TodoItem } from "./TodoItem";
 import { Todo, TodoListProps } from "../Interfaces/TodoInterfaces";
-import { FilterStatuses, PriorityFilter } from "../TaskFilter/Filters";
+import { SortStatuses, PriorityFilter } from "../TaskFilter/Filters";
 
 const TodoList: React.FC<TodoListProps> = ({
   todos,
@@ -36,10 +36,10 @@ const TodoList: React.FC<TodoListProps> = ({
   const filteredTasks = todos
     .filter((todo) => {
       let matchesStatus: boolean = true;
-      if (filter === FilterStatuses.COMPLETED && !todo.completed) {
+      if (filter === SortStatuses.COMPLETED && !todo.completed) {
         matchesStatus = false;
       }
-      if (filter === FilterStatuses.NOT_COMPLETED && todo.completed) {
+      if (filter === SortStatuses.NOT_COMPLETED && todo.completed) {
         matchesStatus = false;
       }
       const matchesPriority: boolean =
@@ -49,13 +49,13 @@ const TodoList: React.FC<TodoListProps> = ({
       return matchesStatus && matchesPriority;
     })
     .sort((a, b) => {
-      if (filter === FilterStatuses.ALPHABET) {
+      if (filter === SortStatuses.ALPHABET) {
         return a.title.localeCompare(b.title);
       }
-      if (filter === FilterStatuses.DATE) {
+      if (filter === SortStatuses.DATE) {
         return b.date - a.date;
       }
-      if (filter === FilterStatuses.COMPLETED_DATE) {
+      if (filter === SortStatuses.COMPLETED_DATE) {
         return b.completeDate - a.completeDate;
       }
       return 0;

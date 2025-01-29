@@ -1,4 +1,4 @@
-import { FilterStatuses } from "../TaskFilter/Filters";
+import { SortStatuses, PriorityFilter } from "../TaskFilter/Filters";
 
 export interface Todo {
   date: number;
@@ -10,16 +10,23 @@ export interface Todo {
 }
 export interface TodoListProps {
   todos: Todo[];
-  filter: FilterStatuses;
+  filter: SortStatuses;
   priorityFilter: string;
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
-
+export interface priorityFilterProps {
+  priorityValue: PriorityFilter;
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  todoId: number;
+  setPriorityValue: React.Dispatch<React.SetStateAction<PriorityFilter>>; 
+}
 export interface TodoItemProps {
   todo: Todo;
+  priorityValue: PriorityFilter;
   editingId: number | null;
   editValue: string;
   todoId: number;
+  setPriorityValue: React.Dispatch<React.SetStateAction<PriorityFilter>>; 
   setEditValue: React.Dispatch<React.SetStateAction<string>>;
   setEditingId: React.Dispatch<React.SetStateAction<number | null>>;
   saveEdit: () => void;
