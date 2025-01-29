@@ -7,15 +7,19 @@ export interface Todo {
   completed: boolean;
   priority: string;
   completeDate: number;
+  category: string;
+  deadline: string;
+  
 }
 export interface TodoListProps {
-  todos: Todo[];
-  sort: SortStatuses;
-  processFilterValue: ProcessFilter;
-  priorityFilter: string;
+  todos: Todo [];
+  sort?: SortStatuses;
+  processFilterValue?: ProcessFilter,
+  priorityFilter?: PriorityFilter;
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 export interface priorityFilterProps {
+  
   priorityValue: PriorityFilter;
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   todoId: number;

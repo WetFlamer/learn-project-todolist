@@ -19,6 +19,8 @@ export function App() {
       completed: false,
       priority: "low",
       completeDate: 0,
+      category: "",
+      deadline: "",
     },
     {
       date: 2,
@@ -27,6 +29,8 @@ export function App() {
       completed: false,
       priority: "high",
       completeDate: 0,
+      category: "",
+      deadline: "",
     },
     {
       date: 1736183691981,
@@ -35,6 +39,8 @@ export function App() {
       completed: false,
       priority: "low",
       completeDate: 0,
+      category: "",
+      deadline: "",
     },
     {
       date: 4,
@@ -43,6 +49,8 @@ export function App() {
       completed: false,
       priority: "low",
       completeDate: 0,
+      category: "",
+      deadline: "",
     },
     {
       date: 3,
@@ -51,6 +59,8 @@ export function App() {
       completed: false,
       priority: "low",
       completeDate: 0,
+      category: "",
+      deadline: "",
     },
   ]);
 
@@ -58,7 +68,9 @@ export function App() {
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>(
     PriorityFilter.ALL
   );
-  const [processFilterValue, setProcessFilterValue] = useState<ProcessFilter>(ProcessFilter.ALL)
+  const [processFilterValue, setProcessFilterValue] = useState<ProcessFilter>(
+    ProcessFilter.ALL
+  );
   return (
     <>
       <div className={styles.mainSpace}>
