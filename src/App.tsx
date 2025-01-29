@@ -19,8 +19,8 @@ export function App() {
       completed: false,
       priority: "low",
       completeDate: 0,
-      category: "",
-      deadline: "",
+      category: "work",
+      deadline: "2025-02-31",
     },
     {
       date: 2,
@@ -29,8 +29,8 @@ export function App() {
       completed: false,
       priority: "high",
       completeDate: 0,
-      category: "",
-      deadline: "",
+      category: "personal",
+      deadline: "2025-02-31",
     },
     {
       date: 1736183691981,
@@ -39,8 +39,8 @@ export function App() {
       completed: false,
       priority: "low",
       completeDate: 0,
-      category: "",
-      deadline: "",
+      category: "work",
+      deadline: "2025-02-31",
     },
     {
       date: 4,
@@ -49,8 +49,8 @@ export function App() {
       completed: false,
       priority: "low",
       completeDate: 0,
-      category: "",
-      deadline: "",
+      category: "study",
+      deadline: "2025-02-31",
     },
     {
       date: 3,
@@ -59,13 +59,14 @@ export function App() {
       completed: false,
       priority: "low",
       completeDate: 0,
-      category: "",
-      deadline: "",
+      category: "work",
+      deadline: "2025-02-31",
     },
   ]);
 
   const [sort, setSort] = useState<SortStatuses>(SortStatuses.ALL);
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>(
+    
     PriorityFilter.ALL
   );
   const [processFilterValue, setProcessFilterValue] = useState<ProcessFilter>(

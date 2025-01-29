@@ -35,6 +35,7 @@ const TodoAdd: React.FC<TodoListProps> = ({ todos, setTodos }) => {
       setPriority(PriorityFilter.LOW);
       setDeadline("");
       setCategory("work");  
+      console.log(todos)
       setIsModalOpen(false);  
     } else {
       alert("Введите название задачи");

@@ -14,21 +14,27 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   setTodos,
   cancelEdit,
   deleteTodo,
-
   startingEdit,
 }) => {
   const [priorityValue, setPriorityValue] = React.useState<PriorityFilter>(
     todo.priority as PriorityFilter
   );
+
   const checkboxTodo = (id: number) => {
     setTodos((prevTodos: Todo[]) =>
       prevTodos.map((todo) =>
         todo.id === id
-          ? { ...todo, completed: !todo.completed, completeDate: Date.now() }
+          ? {
+              ...todo,
+              completed: !todo.completed,
+              completeDate: Date.now(),
+              deadline: "", 
+            }
           : todo
       )
     );
   };
+
   return (
     <li className={styles.todoItem} key={todo.id}>
       {editingId === todo.id ? (
@@ -43,23 +49,54 @@ export const TodoItem: React.FC<TodoItemProps> = ({
         </>
       ) : (
         <>
-          <div
-            className={`${todo.completed ? styles.checked : ""} ${
-              styles.todoItemText
-            }`}
-          >
+          <div className={styles.todoContent}>
             <input
               type="checkbox"
               checked={todo.completed}
               onChange={() => checkboxTodo(todo.id)}
             />
-            {todo.title}
-            <p className={styles.completedTime}>
-              {todo.completed
-                ? new Date(todo.completeDate).toLocaleString()
-                : null}
-            </p>
+
+            <div className={styles.taskInfo}>
+              <span className={styles.taskTitle}>{todo.title}</span>
+
+              <div className={styles.metaInfo}>
+                {todo.category && (
+                  <span
+                    className={`${styles.categoryBadge} ${
+                      styles[todo.category]
+                    }`}
+                  >
+                    {todo.category === "work"
+                      ? "Работа"
+                      : todo.category === "personal"
+                      ? "Личное"
+                      : todo.category === "study"
+                      ? "Учеба"
+                      : "Прочее"}
+                  </span>
+                )}
+
+                {todo.deadline && (
+                  <span
+                    className={`${styles.deadline} ${
+                      new Date(todo.deadline).getTime() < Date.now()
+                        ? styles.expired
+                        : ""
+                    }`}
+                  >
+                    Дедлайн: {new Date(todo.deadline).toLocaleDateString()}
+                  </span>
+                )}
+              </div>
+
+              <p className={styles.completedTime}>
+                {todo.completed
+                  ? `Выполнено: ${new Date(todo.completeDate).toLocaleString()}`
+                  : null}
+              </p>
+            </div>
           </div>
+
           <div className={styles.actions}>
             <button onClick={() => deleteTodo(todo.id)}>Удалить</button>
             <button onClick={() => startingEdit(todo.id, todo.title)}>

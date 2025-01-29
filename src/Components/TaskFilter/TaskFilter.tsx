@@ -23,6 +23,7 @@ export const TaskFilter: React.FC<SortFilterProps> = ({
           <option value={SortStatuses.ALL}>Все</option>
           <option value={SortStatuses.ALPHABET}>По алфавиту</option>
           <option value={SortStatuses.DATE}>По дате публикации</option>
+          <option value={SortStatuses.DEADLINE}>По дедлайну</option>
           <option value={SortStatuses.COMPLETED_DATE}>
             По дате выполнения
           </option>

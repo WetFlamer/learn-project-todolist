@@ -145,3 +145,88 @@ input[type="text"]:focus {
 
     font-size: 10.4px;
   }
+  .todoItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  max-width: 600px;
+}
+
+.todoItem:hover {
+  background-color: #f1f1f1;
+}
+
+.todoContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+}
+
+.taskInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.taskTitle {
+  font-weight: bold;
+  font-size: 16px;
+  display: block;
+}
+
+.metaInfo {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.categoryBadge {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 12px;
+  color: white;
+  display: inline-block;
+}
+
+.work { background-color: #4b9af3; }  
+.personal { background-color: #ff5c5c; } 
+.study { background-color: #ffd700; } 
+.other { background-color: #888; } 
+
+.deadline {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background-color: #eef;
+  color: #333;
+}
+
+.expired {
+  background-color: #ff5c5c;
+  color: white;
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+}
+
+.todoItem input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.checked {
+  text-decoration: line-through;
+  color: #888;
+}

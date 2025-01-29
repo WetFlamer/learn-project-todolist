@@ -3,6 +3,7 @@ export enum SortStatuses {
     ALPHABET = "alphabet",
     DATE = 'date',
     COMPLETED_DATE = 'completedDate',
+    DEADLINE = 'deadLine'
   }
   export enum ProcessFilter {
     ALL = "all",
