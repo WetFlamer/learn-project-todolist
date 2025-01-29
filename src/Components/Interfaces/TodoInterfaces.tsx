@@ -1,4 +1,4 @@
-import { SortStatuses, PriorityFilter } from "../TaskFilter/Filters";
+import { SortStatuses, PriorityFilter, ProcessFilter } from "../TaskFilter/Filters";
 
 export interface Todo {
   date: number;
@@ -11,6 +11,7 @@ export interface Todo {
 export interface TodoListProps {
   todos: Todo[];
   sort: SortStatuses;
+  processFilterValue: ProcessFilter;
   priorityFilter: string;
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }

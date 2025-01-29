@@ -6,6 +6,7 @@ import Header from "./Components/Header/Header";
 import {
   SortStatuses,
   PriorityFilter,
+  ProcessFilter,
 } from "./Components/TaskFilter/Filters";
 import { TaskFilter } from "./Components/TaskFilter/TaskFilter";
 
@@ -57,6 +58,7 @@ export function App() {
   const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>(
     PriorityFilter.ALL
   );
+  const [processFilterValue, setProcessFilterValue] = useState<ProcessFilter>(ProcessFilter.ALL)
   return (
     <>
       <div className={styles.mainSpace}>
@@ -68,11 +70,14 @@ export function App() {
           setPriorityFilter={setPriorityFilter}
           sort={sort}
           todos={todos}
+          processFilterValue={processFilterValue}
+          setProcessFilterValue={setProcessFilterValue}
           setSort={setSort}
         />
         <TodoList
           priorityFilter={priorityFilter}
           sort={sort}
+          processFilterValue={processFilterValue}
           setTodos={setTodos}
           todos={todos}
         />

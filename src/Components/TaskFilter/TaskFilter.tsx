@@ -1,11 +1,13 @@
 import React from "react";
-import { filtersProps } from "../Interfaces/FilterInterfaces";
+import { SortFilterProps } from "../Interfaces/FilterInterfaces";
 import styles from "./TaskFilter.module.css";
-import { SortStatuses, PriorityFilter } from "./Filters";
+import { SortStatuses,  PriorityFilter, ProcessFilter } from "./Filters";
 
-export const TaskFilter: React.FC<filtersProps> = ({
+export const TaskFilter: React.FC<SortFilterProps> = ({
   setSort,
   setPriorityFilter,
+  setProcessFilterValue,
+  processFilterValue,
   priorityFilter,
   sort,
 }) => {
@@ -24,10 +26,17 @@ export const TaskFilter: React.FC<filtersProps> = ({
           <option value={SortStatuses.COMPLETED_DATE}>
             По дате выполнения
           </option>
-          <option value={SortStatuses.COMPLETED}>Выполненные</option>
-          <option value={SortStatuses.NOT_COMPLETED}>Невыполненные</option>
         </select>
-        
+        <label htmlFor="sort">Процесс:</label>
+        <select
+          id="processFilter"
+          value={processFilterValue}
+          onChange={(e) => setProcessFilterValue(e.target.value as ProcessFilter)}
+        >
+          <option value={ProcessFilter.ALL}>Все</option>
+          <option value={ProcessFilter.COMPLETED}>Выполненные</option>
+          <option value={ProcessFilter.NOT_COMPLETED}>Невыполненные</option>
+        </select>
         <label htmlFor="priorityFilter">Приоритет:</label>
         <select
           id="priorityFilter"

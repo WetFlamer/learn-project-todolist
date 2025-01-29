@@ -3,10 +3,12 @@ export enum SortStatuses {
     ALPHABET = "alphabet",
     DATE = 'date',
     COMPLETED_DATE = 'completedDate',
+  }
+  export enum ProcessFilter {
+    ALL = "all",
     COMPLETED = "completed",
     NOT_COMPLETED = "notCompleted",
   }
-
   export enum PriorityFilter {
     ALL = "all",
     HIGH = "high",

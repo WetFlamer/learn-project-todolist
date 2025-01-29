@@ -2,13 +2,14 @@ import React from "react";
 import styles from "./TodoList.module.css";
 import { TodoItem } from "./TodoItem";
 import { Todo, TodoListProps } from "../Interfaces/TodoInterfaces";
-import { SortStatuses, PriorityFilter } from "../TaskFilter/Filters";
+import { SortStatuses, PriorityFilter, ProcessFilter } from "../TaskFilter/Filters";
 
 const TodoList: React.FC<TodoListProps> = ({
   todos,
   setTodos,
   priorityFilter,
   sort,
+  processFilterValue,
 }) => {
   const [editingId, setEditingId] = React.useState<number | null>(null);
   const [editValue, setEditValue] = React.useState<string>("");
@@ -36,10 +37,10 @@ const TodoList: React.FC<TodoListProps> = ({
   const filteredTasks = todos
     .filter((todo) => {
       let matchesStatus: boolean = true;
-      if (sort === SortStatuses.COMPLETED && !todo.completed) {
+      if (processFilterValue === ProcessFilter.COMPLETED && !todo.completed) {
         matchesStatus = false;
       }
-      if (sort === SortStatuses.NOT_COMPLETED && todo.completed) {
+      if (processFilterValue === ProcessFilter.NOT_COMPLETED && todo.completed) {
         matchesStatus = false;
       }
       const matchesPriority: boolean =
