@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./TodoList.module.css";
+import styles from "../styles/TodoList.module.css";
 import { TodoItem } from "./TodoItem";
 import { Todo, TodoListProps } from "../Interfaces/TodoInterfaces";
-import { SortStatuses, PriorityFilter, ProcessFilter } from "../TaskFilter/Filters";
+import { PriorityFilter, ProcessFilter, SortStatuses } from "../SortFilters/Filters";
 
 const TodoList: React.FC<TodoListProps> = ({
   todos,
@@ -53,6 +53,10 @@ const TodoList: React.FC<TodoListProps> = ({
       if (sort === SortStatuses.ALPHABET) {
         return a.title.localeCompare(b.title);
       }
+      if (sort === SortStatuses.DEADLINE) {
+        return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+      }
+      
       if (sort === SortStatuses.DATE) {
         return b.date - a.date;
       }

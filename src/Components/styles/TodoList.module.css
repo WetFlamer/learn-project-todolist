@@ -224,6 +224,8 @@ input[type="text"]:focus {
 .todoItem input[type="checkbox"] {
   margin-right: 10px;
   transform: scale(1.2);
+
+
 }
 
 .checked {

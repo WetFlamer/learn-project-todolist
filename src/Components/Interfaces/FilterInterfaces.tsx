@@ -1,4 +1,4 @@
-import { SortStatuses, PriorityFilter, ProcessFilter } from "../TaskFilter/Filters";
+import { SortStatuses, PriorityFilter, ProcessFilter } from "../SortFilters/Filters";
 import { Todo } from "./TodoInterfaces";
 
 export interface SortFilterProps {

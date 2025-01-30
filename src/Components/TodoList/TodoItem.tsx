@@ -1,8 +1,13 @@
 import React from "react";
-import styles from "./TodoList.module.css";
+import styles from "../styles/TodoList.module.css";
 import { Todo, TodoItemProps } from "../Interfaces/TodoInterfaces";
 import { PriorityComponent } from "../PriorityComponent/PriorityComponent";
-import { PriorityFilter } from "../TaskFilter/Filters";
+import { PriorityFilter } from "../SortFilters/Filters";
+import Button from "../UI/Button";
+import TaskCategoryBadge from "../Task/TaskCategoryBadge";
+import TaskDeadline from "../Task/TaskDeadline";
+import TaskCompletedTime from "../Task/TaskCompletedTime";
+import TaskEditForm from "../Task/TaskEditForm";
 
 export const TodoItem: React.FC<TodoItemProps> = ({
   todo,
@@ -28,7 +33,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
               ...todo,
               completed: !todo.completed,
               completeDate: Date.now(),
-              deadline: "", 
+              deadline: "",
             }
           : todo
       )
@@ -38,15 +43,12 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   return (
     <li className={styles.todoItem} key={todo.id}>
       {editingId === todo.id ? (
-        <>
-          <input
-            type="text"
-            value={editValue}
-            onChange={(e) => setEditValue(e.target.value)}
-          />
-          <button onClick={saveEdit}>Сохранить</button>
-          <button onClick={cancelEdit}>Отменить</button>
-        </>
+        <TaskEditForm
+          editValue={editValue}
+          setEditValue={setEditValue}
+          saveEdit={saveEdit}
+          cancelEdit={cancelEdit}
+        />
       ) : (
         <>
           <div className={styles.todoContent}>
@@ -60,48 +62,26 @@ export const TodoItem: React.FC<TodoItemProps> = ({
               <span className={styles.taskTitle}>{todo.title}</span>
 
               <div className={styles.metaInfo}>
-                {todo.category && (
-                  <span
-                    className={`${styles.categoryBadge} ${
-                      styles[todo.category]
-                    }`}
-                  >
-                    {todo.category === "work"
-                      ? "Работа"
-                      : todo.category === "personal"
-                      ? "Личное"
-                      : todo.category === "study"
-                      ? "Учеба"
-                      : "Прочее"}
-                  </span>
-                )}
-
-                {todo.deadline && (
-                  <span
-                    className={`${styles.deadline} ${
-                      new Date(todo.deadline).getTime() < Date.now()
-                        ? styles.expired
-                        : ""
-                    }`}
-                  >
-                    Дедлайн: {new Date(todo.deadline).toLocaleDateString()}
-                  </span>
-                )}
+                <TaskCategoryBadge category={todo.category} />
+                <TaskDeadline deadline={todo.deadline} />
               </div>
 
-              <p className={styles.completedTime}>
-                {todo.completed
-                  ? `Выполнено: ${new Date(todo.completeDate).toLocaleString()}`
-                  : null}
-              </p>
+              <TaskCompletedTime
+                completed={todo.completed}
+                completeDate={todo.completeDate}
+              />
             </div>
           </div>
 
           <div className={styles.actions}>
-            <button onClick={() => deleteTodo(todo.id)}>Удалить</button>
-            <button onClick={() => startingEdit(todo.id, todo.title)}>
-              Редактировать
-            </button>
+            <Button
+              text="Удалить"
+              onClick={() => deleteTodo(todo.id)}
+            />
+            <Button
+              text="Редактировать"
+              onClick={() => startingEdit(todo.id, todo.title)}
+            />
             <PriorityComponent
               setTodos={setTodos}
               todoId={todoId}

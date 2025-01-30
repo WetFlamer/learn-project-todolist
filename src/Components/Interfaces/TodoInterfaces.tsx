@@ -1,4 +1,4 @@
-import { SortStatuses, PriorityFilter, ProcessFilter } from "../TaskFilter/Filters";
+import { SortStatuses, PriorityFilter, ProcessFilter } from "../SortFilters/Filters";
 
 export interface Todo {
   date: number;
@@ -9,7 +9,6 @@ export interface Todo {
   completeDate: number;
   category: string;
   deadline: string;
-  
 }
 export interface TodoListProps {
   todos: Todo [];

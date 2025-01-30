@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "../TodoList/TodoList.module.css";
+import styles from "../styles/TodoList.module.css";
 import { priorityFilterProps, Todo } from "../Interfaces/TodoInterfaces";
-import { PriorityFilter } from "../TaskFilter/Filters";
+import { PriorityFilter } from "../SortFilters/Filters";
 
 export const PriorityComponent: React.FC<priorityFilterProps> = ({
   priorityValue,
