@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "../styles/TodoList.module.css";
 import { Todo, TodoItemProps } from "../Interfaces/TodoInterfaces";
 import { PriorityComponent } from "../PriorityComponent/PriorityComponent";
@@ -7,20 +7,17 @@ import Button from "../UI/Button";
 import TaskCategoryBadge from "../Task/TaskCategoryBadge";
 import TaskDeadline from "../Task/TaskDeadline";
 import TaskCompletedTime from "../Task/TaskCompletedTime";
-import TaskEditForm from "../Task/TaskEditForm";
+import { TodoEditModal } from "../TodoModals/TodoEditModal";
 
 export const TodoItem: React.FC<TodoItemProps> = ({
   todo,
   todoId,
-  editingId,
-  editValue,
-  setEditValue,
-  saveEdit,
+  todos,
   setTodos,
-  cancelEdit,
   deleteTodo,
-  startingEdit,
 }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingId, setEditingId] = useState<number | null>(null);
   const [priorityValue, setPriorityValue] = React.useState<PriorityFilter>(
     todo.priority as PriorityFilter
   );
@@ -41,56 +38,57 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   };
 
   return (
-    <li className={styles.todoItem} key={todo.id}>
-      {editingId === todo.id ? (
-        <TaskEditForm
-          editValue={editValue}
-          setEditValue={setEditValue}
-          saveEdit={saveEdit}
-          cancelEdit={cancelEdit}
-        />
-      ) : (
-        <>
-          <div className={styles.todoContent}>
-            <input
-              type="checkbox"
-              checked={todo.completed}
-              onChange={() => checkboxTodo(todo.id)}
-            />
+    <>
+      <li className={styles.todoItem} key={todo.id}>
+        <div className={styles.todoContent}>
+          <input
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => checkboxTodo(todo.id)}
+          />
 
-            <div className={styles.taskInfo}>
-              <span className={styles.taskTitle}>{todo.title}</span>
+          <div className={styles.taskInfo}>
+            <span className={styles.taskTitle}>{todo.title}</span>
 
-              <div className={styles.metaInfo}>
-                <TaskCategoryBadge category={todo.category} />
-                <TaskDeadline deadline={todo.deadline} />
-              </div>
-
-              <TaskCompletedTime
-                completed={todo.completed}
-                completeDate={todo.completeDate}
-              />
+            <div className={styles.metaInfo}>
+              <TaskCategoryBadge category={todo.category} />
+              <TaskDeadline deadline={todo.deadline} />
             </div>
-          </div>
 
-          <div className={styles.actions}>
-            <Button
-              text="Удалить"
-              onClick={() => deleteTodo(todo.id)}
-            />
-            <Button
-              text="Редактировать"
-              onClick={() => startingEdit(todo.id, todo.title)}
-            />
-            <PriorityComponent
-              setTodos={setTodos}
-              todoId={todoId}
-              priorityValue={priorityValue}
-              setPriorityValue={setPriorityValue}
+            <TaskCompletedTime
+              completed={todo.completed}
+              completeDate={todo.completeDate}
             />
           </div>
-        </>
+        </div>
+
+        <div className={styles.actions}>
+          <Button text="Удалить" onClick={() => deleteTodo(todo.id)} />
+          <Button
+            text="Редактировать"
+            onClick={() => {
+              setEditingId(todo.id);
+              setIsModalOpen(true);
+            }}
+          />
+          <PriorityComponent
+            setTodos={setTodos}
+            todoPriority={todo.priority as PriorityFilter}
+            todoId={todoId}
+            priorityValue={priorityValue}
+            setPriorityValue={setPriorityValue}
+          />
+        </div>
+      </li>
+      {isModalOpen && (
+        <TodoEditModal
+          editingId={editingId}
+          todos={todos}
+          setTodos={setTodos}
+          setIsModalOpen={setIsModalOpen}
+          todo={todo}
+        />
       )}
-    </li>
+    </>
   );
 };

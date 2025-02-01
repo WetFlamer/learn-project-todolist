@@ -4,13 +4,11 @@ import { priorityFilterProps, Todo } from "../Interfaces/TodoInterfaces";
 import { PriorityFilter } from "../SortFilters/Filters";
 
 export const PriorityComponent: React.FC<priorityFilterProps> = ({
-  priorityValue,
-  setTodos,
   todoId,
-  setPriorityValue,
+  todoPriority,
+  setTodos,
 }) => {
   const changePriorityValue = (newPriority: string) => {
-    setPriorityValue(newPriority as PriorityFilter);
     setTodos((prevTodos: Todo[]) =>
       prevTodos.map((todo) =>
         todo.id === todoId ? { ...todo, priority: newPriority } : todo
@@ -25,12 +23,12 @@ export const PriorityComponent: React.FC<priorityFilterProps> = ({
       </label>
       <select
         id="priority"
-        value={priorityValue}
+        value={todoPriority}
         onChange={(e) => changePriorityValue(e.target.value)}
       >
-        <option value="high">Высокий</option>
-        <option value="medium">Средний</option>
-        <option value="low">Низкий</option>
+        <option value={PriorityFilter.HIGH}>Высокий</option>
+        <option value={PriorityFilter.MEDIUM}>Средний</option>
+        <option value={PriorityFilter.LOW}>Низкий</option>
       </select>
     </div>
   );

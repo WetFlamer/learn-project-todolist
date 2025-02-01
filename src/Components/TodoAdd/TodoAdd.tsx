@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { TodoListProps } from "../Interfaces/TodoInterfaces";
-import { TodoModal } from "./TodoModal";
+import { TodoAddModal } from "../TodoModals/TodoAddModal";
 import styles from "../styles/TodoAdd.module.css";
 
 const TodoAdd: React.FC<TodoListProps> = ({ todos, setTodos }) => {
@@ -8,15 +8,13 @@ const TodoAdd: React.FC<TodoListProps> = ({ todos, setTodos }) => {
 
   return (
     <div className={styles.todoAddForm}>
-      <button onClick={() => setIsModalOpen(true)}>
-        Добавить задачу
-      </button>
+      <button onClick={() => setIsModalOpen(true)}>Добавить задачу</button>
 
       {isModalOpen && (
-        <TodoModal 
-          todos={todos} 
-          setTodos={setTodos} 
-          setIsModalOpen={setIsModalOpen} 
+        <TodoAddModal
+          todos={todos}
+          setTodos={setTodos}
+          setIsModalOpen={setIsModalOpen}
         />
       )}
     </div>

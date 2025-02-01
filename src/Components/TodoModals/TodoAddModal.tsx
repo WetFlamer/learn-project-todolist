@@ -1,15 +1,11 @@
 import React, { useState } from "react";
-import { TodoListProps } from "../Interfaces/TodoInterfaces";
+import { TodoModalProps } from "../Interfaces/TodoInterfaces";
 import { PriorityFilter } from "../SortFilters/Filters";
 import styles from "../styles/Modal.module.css";
 
-interface TodoModalProps {
-  todos: TodoListProps["todos"];
-  setTodos: TodoListProps["setTodos"];
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-const TodoModal: React.FC<TodoModalProps> = ({ todos, setTodos, setIsModalOpen }) => {
+
+export const TodoAddModal: React.FC<TodoModalProps> = ({ todos, setTodos, setIsModalOpen }) => {
   const [todoTitle, setTodoTitle] = useState("");
   const [priority, setPriority] = useState<PriorityFilter>(PriorityFilter.LOW);
   const [deadline, setDeadline] = useState("");
@@ -81,4 +77,3 @@ const TodoModal: React.FC<TodoModalProps> = ({ todos, setTodos, setIsModalOpen }
   );
 };
 
-export { TodoModal };
