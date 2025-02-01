@@ -14,7 +14,10 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   todoId,
   todos,
   setTodos,
-  deleteTodo,
+  handleDragStart,
+  handleDragOver,
+  handleDrop,
+  deleteTodo
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -39,14 +42,20 @@ export const TodoItem: React.FC<TodoItemProps> = ({
 
   return (
     <>
-      <li className={styles.todoItem} key={todo.id}>
+      <li
+        className={`${styles.todoItem}`}
+        key={todo.id}
+        draggable
+        onDragStart={(e) => handleDragStart(todo.id, e)}
+        onDragOver={handleDragOver}
+        onDrop={(e) => handleDrop(todo.id, e)}
+      >
         <div className={styles.todoContent}>
           <input
             type="checkbox"
             checked={todo.completed}
             onChange={() => checkboxTodo(todo.id)}
           />
-
           <div className={styles.taskInfo}>
             <span className={styles.taskTitle}>{todo.title}</span>
 
@@ -61,7 +70,6 @@ export const TodoItem: React.FC<TodoItemProps> = ({
             />
           </div>
         </div>
-
         <div className={styles.actions}>
           <Button text="Удалить" onClick={() => deleteTodo(todo.id)} />
           <Button

@@ -3,6 +3,7 @@
 }
 
 .todoItem {
+  cursor: grab;
   max-width: 500px;
   display: flex;
   align-items: center;
@@ -231,4 +232,19 @@ input[type="text"]:focus {
 .checked {
   text-decoration: line-through;
   color: #888;
+}
+.dragged {
+  opacity: 0.5;
+  transform: scale(1.05);
+  background-color: #e0e0e0;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.drag-over {
+  background-color: #d6f5d6;
+  border: 2px dashed #4caf50;
+  transition: background-color 0.2s, border 0.2s;
+}
+.grabbing {
+  cursor: grabbing;
 }

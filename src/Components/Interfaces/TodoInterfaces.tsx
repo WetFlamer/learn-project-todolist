@@ -26,6 +26,7 @@ export interface TodoListProps {
   sort?: SortStatuses;
   processFilterValue?: ProcessFilter;
   priorityFilter?: PriorityFilter;
+
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 export interface priorityFilterProps {
@@ -39,6 +40,9 @@ export interface TodoItemProps {
   todos: Todo[];
   todo: Todo;
   todoId: number;
+  handleDragStart: (id: number, e: React.DragEvent<HTMLLIElement>) => void;
+  handleDragOver: (e: React.DragEvent<HTMLLIElement>) => void;
+  handleDrop: (id: number, e: React.DragEvent<HTMLLIElement>) => void;
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   deleteTodo: (id: number) => void;
 }
