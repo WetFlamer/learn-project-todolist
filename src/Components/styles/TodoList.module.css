@@ -30,7 +30,7 @@
   color: #888;
 }
 
-button {
+.defaultButton {
   background-color: #692dcf;
   border: none;
   color: white;
@@ -41,15 +41,15 @@ button {
   transition: background-color 0.2s;
 }
 
-button:hover {
+.defaultButton:hover {
     background-color: #4c628bf1;
 }
 
-button:focus {
+.defaultButton:focus {
   outline: none;
 }
 
-button:disabled {
+.defaultButton:disabled {
   background-color: #f2f2f2;
   cursor: not-allowed;
 }

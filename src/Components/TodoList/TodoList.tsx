@@ -7,6 +7,7 @@ import {
   ProcessFilter,
   SortStatuses,
 } from "../SortFilters/Filters";
+import SearchForm from "../Search/SearchForm";
 
 const TodoList: React.FC<TodoListProps> = ({
   todos,
@@ -15,6 +16,8 @@ const TodoList: React.FC<TodoListProps> = ({
   sort,
   processFilterValue,
 }) => {
+  const [searchValue, setSearchValue] = useState("");
+
   const deleteTodo = (id: number) => {
     setTodos((prevTodos: Todo[]) => prevTodos.filter((todo) => todo.id !== id));
   };
@@ -36,6 +39,9 @@ const TodoList: React.FC<TodoListProps> = ({
 
       return matchesStatus && matchesPriority;
     })
+    .filter((todo) =>
+      todo.title.toLowerCase().includes(searchValue.toLowerCase())
+    )
     .sort((a, b) => {
       if (sort === SortStatuses.ALPHABET) {
         return a.title.localeCompare(b.title);
@@ -59,14 +65,12 @@ const TodoList: React.FC<TodoListProps> = ({
     setDraggedItem(id);
     e.currentTarget.classList.add(styles.dragged);
     e.currentTarget.classList.add(styles.grabbing);
-
   };
 
   const handleDragOver = (e: React.DragEvent<HTMLLIElement>) => {
     e.preventDefault();
     e.currentTarget.classList.add(styles.dragOver);
   };
-
 
   const handleDrop = (id: number) => {
     if (draggedItem === null) return;
@@ -102,6 +106,7 @@ const TodoList: React.FC<TodoListProps> = ({
 
   return (
     <>
+      <SearchForm searchValue={searchValue} setSearchValue={setSearchValue} />
       <ul className={styles.listSpace}>
         {filteredTasks.length === 0 && <h3>Задач нет</h3>}
         {filteredTasks.map((todo) => (

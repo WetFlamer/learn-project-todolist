@@ -15,8 +15,8 @@ export interface Todo {
   deadline: string;
 }
 export interface TodoModalProps {
-  editingId: number | null;
-  todo: Todo;
+  editingId?: number | null;
+  todo?: Todo;
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
