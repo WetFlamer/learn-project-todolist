@@ -1,9 +1,11 @@
 import { useTodoState } from "./Components/hooks/useTodoState";
-import styles from "./App.module.css";
+import styles from "../src/styles/App.module.css";
 import TodoList from "./Components/TodoList/TodoList";
 import TodoAdd from "./Components/TodoAdd/TodoAdd";
 import Header from "./Components/Header/Header";
 import { TaskFilter } from "./Components/SortFilters/TaskFilter";
+import { useTheme } from "./Components/hooks/useTheme";
+import { useEffect } from "react";
 
 export function App() {
   const {
@@ -14,13 +16,16 @@ export function App() {
     processFilterValue,
     setProcessFilterValue,
   } = useTodoState();
+  const { theme } = useTheme();
 
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
   return (
-    
     <div className={styles.mainSpace}>
       <Header />
       <h1>Список задач</h1>
-      <TodoAdd/>
+      <TodoAdd />
       <TaskFilter
         priorityFilter={priorityFilter}
         setPriorityFilter={setPriorityFilter}

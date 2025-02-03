@@ -1,6 +1,6 @@
 import React from "react";
 import { ProcessFilter } from "./Filters";
-import styles from "../styles/TaskFilter.module.css";
+import styles from "../../styles/TaskFilter.module.css";
 
 interface ProcessFilterProps {
   processFilterValue: ProcessFilter;

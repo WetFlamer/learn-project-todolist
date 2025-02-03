@@ -1,22 +1,21 @@
 import React from "react";
-import styles from "../styles/TodoList.module.css";
+import styles from "../../styles/TodoList.module.css";
 import { priorityFilterProps } from "../Interfaces/TodoInterfaces";
 import { PriorityFilter } from "../SortFilters/Filters";
 import { useDispatch } from "react-redux";
-import {changePriorityValue} from '../../store/todoSlice'
+import { changePriorityValue } from "../../store/todoSlice";
 export const PriorityComponent: React.FC<priorityFilterProps> = ({
   todoId,
   todoPriority,
 }) => {
-
-  const dispatch = useDispatch()
-  const changePriority = (newPriority: string) =>  dispatch(
-          changePriorityValue({
-            id: todoId,
-            priority: newPriority,
-          
-          })
-        );
+  const dispatch = useDispatch();
+  const changePriority = (newPriority: string) =>
+    dispatch(
+      changePriorityValue({
+        id: todoId,
+        priority: newPriority,
+      })
+    );
   return (
     <div className={styles.priorityWrapper}>
       <label htmlFor="priority" className={styles.priorityLabel}>

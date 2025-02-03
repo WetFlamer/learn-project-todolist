@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../styles/TodoList.module.css";
+import styles from "../../styles/TodoList.module.css";
 import { TodoItemProps } from "../Interfaces/TodoInterfaces";
 import { PriorityComponent } from "../PriorityComponent/PriorityComponent";
 import { PriorityFilter } from "../SortFilters/Filters";
@@ -9,7 +9,8 @@ import TaskDeadline from "../Task/TaskDeadline";
 import TaskCompletedTime from "../Task/TaskCompletedTime";
 import { TodoEditModal } from "../TodoModals/TodoEditModal";
 import { useDispatch } from "react-redux";
-import {changeCheckBox} from '../../store/todoSlice'
+import { changeCheckBox } from "../../store/todoSlice";
+import { FaTrash, FaEdit } from "react-icons/fa";
 
 export const TodoItem: React.FC<TodoItemProps> = ({
   todo,
@@ -18,7 +19,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
   handleDragStart,
   handleDragOver,
   handleDrop,
-  deleteTodo
+  deleteTodo,
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<number | null>(null);
@@ -26,13 +27,15 @@ export const TodoItem: React.FC<TodoItemProps> = ({
     todo.priority as PriorityFilter
   );
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const checkboxTodo = (id: number) => {
-    dispatch(changeCheckBox({
-      id: id,
-    }))
-  }
+    dispatch(
+      changeCheckBox({
+        id: id,
+      })
+    );
+  };
 
   return (
     <>
@@ -66,19 +69,24 @@ export const TodoItem: React.FC<TodoItemProps> = ({
           </div>
         </div>
         <div className={styles.actions}>
-          <Button text="Удалить" onClick={() => deleteTodo(todo.id)} />
-          <Button
-            text="Редактировать"
-            onClick={() => {
-              setEditingId(todo.id);
-              setIsModalOpen(true);
-            }}
-          />
           <PriorityComponent
             todoPriority={todo.priority as PriorityFilter}
             todoId={todoId}
             priorityValue={priorityValue}
             setPriorityValue={setPriorityValue}
+          />
+          <Button
+            icon={FaTrash}
+            onClick={() => deleteTodo(todo.id)}
+            variant="icon"
+          />
+          <Button
+            icon={FaEdit}
+            onClick={() => {
+              setEditingId(todo.id);
+              setIsModalOpen(true);
+            }}
+            variant="icon"
           />
         </div>
       </li>

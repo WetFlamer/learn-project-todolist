@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TodoListProps } from "../Interfaces/TodoInterfaces";
 import { TodoAddModal } from "../TodoModals/TodoAddModal";
-import styles from "../styles/TodoAdd.module.css";
+import styles from "../../styles/TodoAdd.module.css";
 
 const TodoAdd: React.FC<TodoListProps> = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

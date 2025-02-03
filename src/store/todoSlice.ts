@@ -3,6 +3,7 @@ import { Todo } from "../Components/Interfaces/TodoInterfaces";
 
 interface TodoState {
   todos: Todo[];
+  theme: string;
 }
 
 const initialState: TodoState = {
@@ -58,6 +59,7 @@ const initialState: TodoState = {
       deadline: "2025-02-5",
     },
   ],
+  theme: localStorage.getItem('theme') || 'light'
 };
 
 const todoSlice = createSlice({
@@ -134,20 +136,15 @@ const todoSlice = createSlice({
     ) {
       const { draggedItemId, targetItemId } = action.payload;
 
-      const draggedIndex = state.todos.findIndex(
-        (todo) => todo.id === draggedItemId
-      );
-      const targetIndex = state.todos.findIndex(
-        (todo) => todo.id === targetItemId
-      );
+      const draggedIndex = state.todos.findIndex((t) => t.id === draggedItemId);
+      const targetIndex = state.todos.findIndex((t) => t.id === targetItemId);
 
       if (draggedIndex !== -1 && targetIndex !== -1) {
-        const updatedTodos = [...state.todos];
-        const [movedItem] = updatedTodos.splice(draggedIndex, 1);
-        updatedTodos.splice(targetIndex, 0, movedItem);
-        state.todos = updatedTodos;
+        const [movedItem] = state.todos.splice(draggedIndex, 1);
+        state.todos.splice(targetIndex, 0, movedItem);
       }
     },
+   
   },
 });
 

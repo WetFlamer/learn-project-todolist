@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { TodoModalAddProps } from "../Interfaces/TodoInterfaces";
 import { PriorityFilter } from "../SortFilters/Filters";
-import styles from "../styles/Modal.module.css";
+import styles from "../../styles/Modal.module.css";
 import { useDispatch } from "react-redux";
 import { setTodos } from "../../store/todoSlice";
 

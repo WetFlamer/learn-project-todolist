@@ -1,5 +1,5 @@
 import React from "react";
-import styles from '../styles/Search.module.css'
+import styles from '../../styles/Search.module.css'
 import { SearchProps } from "../Interfaces/SearchInterfaces";
 
 const SearchForm: React.FC<SearchProps> = ({ searchValue, setSearchValue }) => {

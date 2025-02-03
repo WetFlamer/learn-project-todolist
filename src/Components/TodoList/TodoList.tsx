@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/";
-import styles from "../styles/TodoList.module.css";
+import styles from "../../styles/TodoList.module.css";
 import { TodoItem } from "./TodoItem";
 import { TodoListProps } from "../Interfaces/TodoInterfaces";
 import { deleteTodo, reorderTodos } from "../../store/todoSlice";

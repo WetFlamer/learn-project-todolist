@@ -3,7 +3,7 @@ import { SortFilter } from "./SortFilter";
 import { ProcessFilterComponent } from "./ProcessFilter";
 import { PriorityFilterComponent } from "./PriorityFilter";
 import { SortFilterProps } from "../Interfaces/FilterInterfaces";
-import styles from "../styles/TaskFilter.module.css";
+import styles from "../../styles/TaskFilter.module.css";
 
 export const TaskFilter: React.FC<SortFilterProps> = ({
   setSort,

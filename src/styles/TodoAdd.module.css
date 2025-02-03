@@ -9,8 +9,8 @@
 
 .todoAddForm button {
   padding: 10px 20px;
-  background-color: #692dcf;
-  color: rgb(255, 255, 255);
+  background-color: var(--button-color);
+  color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;

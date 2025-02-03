@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../styles/TodoList.module.css";
+import styles from "../../styles/TodoList.module.css";
 
 interface TaskCompletedTimeProps {
   completed: boolean;

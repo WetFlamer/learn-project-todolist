@@ -1,25 +1,23 @@
 
-
 .todoItem {
   cursor: grab;
-  max-width: 500px;
+  max-width: 600px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 10px;
   margin: 10px 0;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+  background-color: var(--bg-color); 
+  border: 1px solid var(--border-color); 
   border-radius: 4px;
   transition: background-color 0.3s;
-  
 }
 input:checked + .taskInfo{
   text-decoration: line-through;
   color: #888;
 }
 .todoItem:hover {
-  background-color: #f1f1f1;
+  background-color: var(--hover-item-color);
 }
 
 .todoItem input[type="checkbox"] {
@@ -32,7 +30,7 @@ input:checked + .taskInfo{
 }
 
 .defaultButton {
-  background-color: #692dcf;
+  background-color: var(--button-color);
   border: none;
   color: white;
   border-radius: 4px;
@@ -95,7 +93,7 @@ input[type="text"]:focus {
     font-size: 10px;
     font-weight: bold;
     margin-bottom: 5px;
-    color: #333;
+    color: var(--text-color);
   }
   
   select {
@@ -103,7 +101,9 @@ input[type="text"]:focus {
     font-size: 14px;
     border-radius: 4px;
     border: 1px solid #ccc;
-    background-color: #fff;
+    color: var(--text-color);
+    border-color: var(--select-color);
+    background-color: var(--select-color);
     cursor: pointer;
     transition: border-color 0.2s;
     width: 120px;
@@ -147,22 +147,7 @@ input[type="text"]:focus {
 
     font-size: 10.4px;
   }
-  .todoItem {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  margin: 10px 0;
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  transition: background-color 0.3s;
-  max-width: 600px;
-}
-
-.todoItem:hover {
-  background-color: #f1f1f1;
-}
+ 
 
 .todoContent {
   display: flex;
@@ -179,6 +164,7 @@ input[type="text"]:focus {
 
 .taskTitle {
   font-weight: bold;
+  color: var(--title-color);
   font-size: 16px;
   display: block;
 }
@@ -199,9 +185,9 @@ input[type="text"]:focus {
   display: inline-block;
 }
 
-.work { background-color: #4b9af3; }  
-.personal { background-color: #ff5c5c; } 
-.study { background-color: #ffd700; } 
+.work { background-color: var(--info-category-color); }  
+.personal { background-color: var(--info-color); } 
+.study { background-color: var(--info-category-color-o); } 
 .other { background-color: #888; } 
 
 .deadline {
@@ -214,7 +200,7 @@ input[type="text"]:focus {
 }
 
 .expired {
-  background-color: #ff5c5c;
+  background-color: var(--info-color);
   color: white;
 }
 
@@ -244,4 +230,19 @@ input[type="text"]:focus {
 }
 .grabbing {
   cursor: grabbing;
+}
+.iconButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  color: var(--button-text-color);
+  transition: color 0.2s;
+}
+
+.iconButton:hover {
+  color: var(--hover-color);
 }
