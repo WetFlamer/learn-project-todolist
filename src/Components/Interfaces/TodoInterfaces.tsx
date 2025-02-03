@@ -42,5 +42,6 @@ export interface TodoItemProps {
   handleDragStart: (id: number, e: React.DragEvent<HTMLLIElement>) => void;
   handleDragOver: (e: React.DragEvent<HTMLLIElement>) => void;
   handleDrop: (id: number, e: React.DragEvent<HTMLLIElement>) => void;
+  handleDragEnd: (e: React.DragEvent<HTMLLIElement>) => void;
   deleteTodo: (id: number) => void;
 }

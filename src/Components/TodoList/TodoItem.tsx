@@ -14,6 +14,7 @@ import {changeCheckBox} from '../../store/todoSlice'
 export const TodoItem: React.FC<TodoItemProps> = ({
   todo,
   todoId,
+  handleDragEnd,
   handleDragStart,
   handleDragOver,
   handleDrop,
@@ -41,6 +42,7 @@ export const TodoItem: React.FC<TodoItemProps> = ({
         draggable
         onDragStart={(e) => handleDragStart(todo.id, e)}
         onDragOver={handleDragOver}
+        onDragEnd={handleDragEnd}
         onDrop={(e) => handleDrop(todo.id, e)}
       >
         <div className={styles.todoContent}>

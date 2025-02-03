@@ -87,19 +87,15 @@ const TodoList: React.FC<TodoListProps> = ({
 
     setDraggedItem(null);
 
-    document.querySelectorAll(`.${styles.dragged}`).forEach((el) => {
-      el.classList.remove(styles.dragged);
-    });
-
     document.querySelectorAll(`.${styles.dragOver}`).forEach((el) => {
       el.classList.remove(styles.dragOver);
     });
-
-    document.querySelectorAll(`.${styles.grabbing}`).forEach((el) => {
-      el.classList.remove(styles.grabbing);
-    });
+   
   };
-
+  const handleDragEnd = (e: React.DragEvent<HTMLLIElement>) => {
+    e.currentTarget.classList.remove(styles.dragged);
+    e.currentTarget.classList.remove(styles.grabbing);
+  };
   return (
     <>
       <SearchForm searchValue={searchValue} setSearchValue={setSearchValue} />
@@ -111,6 +107,7 @@ const TodoList: React.FC<TodoListProps> = ({
             handleDragStart={handleDragStart}
             handleDragOver={handleDragOver}
             handleDrop={handleDrop}
+            handleDragEnd={handleDragEnd}
             todo={todo}
             todos={todos}
             todoId={todo.id}
