@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { TodoModalProps } from "../Interfaces/TodoInterfaces";
+import { TodoModalAddProps } from "../Interfaces/TodoInterfaces";
 import { PriorityFilter } from "../SortFilters/Filters";
 import styles from "../styles/Modal.module.css";
+import { useDispatch } from "react-redux";
+import { setTodos } from "../../store/todoSlice";
 
-
-
-export const TodoAddModal: React.FC<TodoModalProps> = ({ todos, setTodos, setIsModalOpen }) => {
+export const TodoAddModal: React.FC<TodoModalAddProps> = ({ setIsModalOpen }) => {
+  const dispatch = useDispatch();
   const [todoTitle, setTodoTitle] = useState("");
   const [priority, setPriority] = useState<PriorityFilter>(PriorityFilter.LOW);
   const [deadline, setDeadline] = useState("");
@@ -16,30 +17,24 @@ export const TodoAddModal: React.FC<TodoModalProps> = ({ todos, setTodos, setIsM
   };
 
   const handleAddTodo = () => {
-    if (todoTitle.length > 0) {
-      setTodos([
-        {
-          date: Date.now(),
-          id: Date.now(),
-          title: todoTitle,
-          completed: false,
-          priority,
-          completeDate: 0,
-          deadline,
-          category,
-        },
-        ...todos,
-      ]);
+    if (todoTitle.trim().length > 0) {
+      dispatch(
+        setTodos({
+          todoTitle: todoTitle,
+          priority: priority,
+          deadline: deadline,
+          category: category,
+        })
+      );
       setTodoTitle("");
       setPriority(PriorityFilter.LOW);
       setDeadline("");
       setCategory("work");
-      setIsModalOpen(false); 
+      setIsModalOpen(false);
     } else {
       alert("Введите название задачи");
     }
   };
-
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>
@@ -51,7 +46,10 @@ export const TodoAddModal: React.FC<TodoModalProps> = ({ todos, setTodos, setIsM
           placeholder="Название задачи"
         />
         <label htmlFor="priority">Приоритет:</label>
-        <select value={priority} onChange={(e) => setPriority(e.target.value as PriorityFilter)}>
+        <select
+          value={priority}
+          onChange={(e) => setPriority(e.target.value as PriorityFilter)}
+        >
           <option value={PriorityFilter.LOW}>Низкий приоритет</option>
           <option value={PriorityFilter.MEDIUM}>Средний приоритет</option>
           <option value={PriorityFilter.HIGH}>Высокий приоритет</option>
@@ -61,7 +59,7 @@ export const TodoAddModal: React.FC<TodoModalProps> = ({ todos, setTodos, setIsM
           type="date"
           value={deadline}
           onChange={(e) => setDeadline(e.target.value)}
-          max="2035-01-01" 
+          max="2035-01-01"
         />
         <label htmlFor="category">Категория:</label>
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
@@ -76,4 +74,3 @@ export const TodoAddModal: React.FC<TodoModalProps> = ({ todos, setTodos, setIsM
     </div>
   );
 };
-

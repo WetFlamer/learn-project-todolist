@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "../styles/TodoList.module.css";
-import { Todo, TodoItemProps } from "../Interfaces/TodoInterfaces";
+import { TodoItemProps } from "../Interfaces/TodoInterfaces";
 import { PriorityComponent } from "../PriorityComponent/PriorityComponent";
 import { PriorityFilter } from "../SortFilters/Filters";
 import Button from "../UI/Button";
@@ -8,12 +8,12 @@ import TaskCategoryBadge from "../Task/TaskCategoryBadge";
 import TaskDeadline from "../Task/TaskDeadline";
 import TaskCompletedTime from "../Task/TaskCompletedTime";
 import { TodoEditModal } from "../TodoModals/TodoEditModal";
+import { useDispatch } from "react-redux";
+import {changeCheckBox} from '../../store/todoSlice'
 
 export const TodoItem: React.FC<TodoItemProps> = ({
   todo,
   todoId,
-  todos,
-  setTodos,
   handleDragStart,
   handleDragOver,
   handleDrop,
@@ -25,20 +25,13 @@ export const TodoItem: React.FC<TodoItemProps> = ({
     todo.priority as PriorityFilter
   );
 
+  const dispatch = useDispatch()
+
   const checkboxTodo = (id: number) => {
-    setTodos((prevTodos: Todo[]) =>
-      prevTodos.map((todo) =>
-        todo.id === id
-          ? {
-              ...todo,
-              completed: !todo.completed,
-              completeDate: Date.now(),
-              deadline: "",
-            }
-          : todo
-      )
-    );
-  };
+    dispatch(changeCheckBox({
+      id: id,
+    }))
+  }
 
   return (
     <>
@@ -80,7 +73,6 @@ export const TodoItem: React.FC<TodoItemProps> = ({
             }}
           />
           <PriorityComponent
-            setTodos={setTodos}
             todoPriority={todo.priority as PriorityFilter}
             todoId={todoId}
             priorityValue={priorityValue}
@@ -91,8 +83,6 @@ export const TodoItem: React.FC<TodoItemProps> = ({
       {isModalOpen && (
         <TodoEditModal
           editingId={editingId}
-          todos={todos}
-          setTodos={setTodos}
           setIsModalOpen={setIsModalOpen}
           todo={todo}
         />

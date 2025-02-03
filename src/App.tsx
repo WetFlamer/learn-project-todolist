@@ -7,8 +7,6 @@ import { TaskFilter } from "./Components/SortFilters/TaskFilter";
 
 export function App() {
   const {
-    todos,
-    setTodos,
     sort,
     setSort,
     priorityFilter,
@@ -22,12 +20,11 @@ export function App() {
     <div className={styles.mainSpace}>
       <Header />
       <h1>Список задач</h1>
-      <TodoAdd todos={todos} setTodos={setTodos} />
+      <TodoAdd/>
       <TaskFilter
         priorityFilter={priorityFilter}
         setPriorityFilter={setPriorityFilter}
         sort={sort}
-        todos={todos}
         processFilterValue={processFilterValue}
         setProcessFilterValue={setProcessFilterValue}
         setSort={setSort}
@@ -36,8 +33,6 @@ export function App() {
         priorityFilter={priorityFilter}
         sort={sort}
         processFilterValue={processFilterValue}
-        setTodos={setTodos}
-        todos={todos}
       />
     </div>
   );

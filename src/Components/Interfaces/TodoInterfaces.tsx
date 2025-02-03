@@ -16,23 +16,22 @@ export interface Todo {
 }
 export interface TodoModalProps {
   editingId?: number | null;
-  todo?: Todo;
-  todos: Todo[];
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
+  todo: Todo;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface TodoModalAddProps {
+  editingId?: number | null;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export interface TodoListProps {
-  todos: Todo[];
   sort?: SortStatuses;
   processFilterValue?: ProcessFilter;
   priorityFilter?: PriorityFilter;
-
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 export interface priorityFilterProps {
   priorityValue: PriorityFilter;
   todoPriority: PriorityFilter;
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   todoId: number;
   setPriorityValue: React.Dispatch<React.SetStateAction<PriorityFilter>>;
 }
@@ -43,6 +42,5 @@ export interface TodoItemProps {
   handleDragStart: (id: number, e: React.DragEvent<HTMLLIElement>) => void;
   handleDragOver: (e: React.DragEvent<HTMLLIElement>) => void;
   handleDrop: (id: number, e: React.DragEvent<HTMLLIElement>) => void;
-  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   deleteTodo: (id: number) => void;
 }

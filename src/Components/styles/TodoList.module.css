@@ -1,6 +1,4 @@
-.checked {
-    text-decoration: line-through;
-}
+
 
 .todoItem {
   cursor: grab;
@@ -16,7 +14,10 @@
   transition: background-color 0.3s;
   
 }
-
+input:checked + .taskInfo{
+  text-decoration: line-through;
+  color: #888;
+}
 .todoItem:hover {
   background-color: #f1f1f1;
 }
@@ -229,10 +230,6 @@ input[type="text"]:focus {
 
 }
 
-.checked {
-  text-decoration: line-through;
-  color: #888;
-}
 .dragged {
   opacity: 0.5;
   transform: scale(1.05);

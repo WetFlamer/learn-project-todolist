@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/";
 import styles from "../styles/TodoList.module.css";
 import { TodoItem } from "./TodoItem";
-import { Todo, TodoListProps } from "../Interfaces/TodoInterfaces";
+import { TodoListProps } from "../Interfaces/TodoInterfaces";
+import { deleteTodo, reorderTodos } from "../../store/todoSlice";
 import {
   PriorityFilter,
   ProcessFilter,
@@ -10,17 +13,22 @@ import {
 import SearchForm from "../Search/SearchForm";
 
 const TodoList: React.FC<TodoListProps> = ({
-  todos,
-  setTodos,
   priorityFilter,
   sort,
   processFilterValue,
 }) => {
   const [searchValue, setSearchValue] = useState("");
+  const todos = useSelector((state: RootState) => state.todos.todos);
+  const dispatch = useDispatch();
 
-  const deleteTodo = (id: number) => {
-    setTodos((prevTodos: Todo[]) => prevTodos.filter((todo) => todo.id !== id));
+  const deleteTodos = (id: number) => {
+    dispatch(
+      deleteTodo({
+        id: id,
+      })
+    );
   };
+
   const filteredTasks = todos
     .filter((todo) => {
       let matchesStatus: boolean = true;
@@ -75,20 +83,7 @@ const TodoList: React.FC<TodoListProps> = ({
   const handleDrop = (id: number) => {
     if (draggedItem === null) return;
 
-    setTodos((prevTodo) => {
-      const draggedIndex = prevTodo.findIndex(
-        (todo) => todo.id === draggedItem
-      );
-      const targetIndex = prevTodo.findIndex((todo) => todo.id === id);
-
-      if (draggedIndex === -1 || targetIndex === -1) return prevTodo;
-
-      const updatedTasks = [...prevTodo];
-      const [movedItem] = updatedTasks.splice(draggedIndex, 1);
-      updatedTasks.splice(targetIndex, 0, movedItem);
-
-      return updatedTasks;
-    });
+    dispatch(reorderTodos({ draggedItemId: draggedItem, targetItemId: id }));
 
     setDraggedItem(null);
 
@@ -99,6 +94,7 @@ const TodoList: React.FC<TodoListProps> = ({
     document.querySelectorAll(`.${styles.dragOver}`).forEach((el) => {
       el.classList.remove(styles.dragOver);
     });
+
     document.querySelectorAll(`.${styles.grabbing}`).forEach((el) => {
       el.classList.remove(styles.grabbing);
     });
@@ -118,8 +114,7 @@ const TodoList: React.FC<TodoListProps> = ({
             todo={todo}
             todos={todos}
             todoId={todo.id}
-            setTodos={setTodos}
-            deleteTodo={deleteTodo}
+            deleteTodo={deleteTodos}
           />
         ))}
       </ul>
