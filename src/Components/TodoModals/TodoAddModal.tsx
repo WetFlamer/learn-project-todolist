@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { TodoModalAddProps } from "../Interfaces/TodoInterfaces";
 import { PriorityFilter } from "../SortFilters/Filters";
 import styles from "../../styles/Modal.module.css";
-import { useDispatch } from "react-redux";
-import { setTodos } from "../../store/todoSlice";
+import { addTodo } from "../../store/todoSlice";
+import { useAppDispatch } from "../../App";
 
 export const TodoAddModal: React.FC<TodoModalAddProps> = ({ setIsModalOpen }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [todoTitle, setTodoTitle] = useState("");
   const [priority, setPriority] = useState<PriorityFilter>(PriorityFilter.LOW);
   const [deadline, setDeadline] = useState("");
@@ -19,8 +19,8 @@ export const TodoAddModal: React.FC<TodoModalAddProps> = ({ setIsModalOpen }) =>
   const handleAddTodo = () => {
     if (todoTitle.trim().length > 0) {
       dispatch(
-        setTodos({
-          todoTitle: todoTitle,
+        addTodo({
+          title: todoTitle,
           priority: priority,
           deadline: deadline,
           category: category,
@@ -35,6 +35,7 @@ export const TodoAddModal: React.FC<TodoModalAddProps> = ({ setIsModalOpen }) =>
       alert("Введите название задачи");
     }
   };
+  
   return (
     <div className={styles.modal}>
       <div className={styles.modalContent}>

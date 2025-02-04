@@ -1,16 +1,18 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { RootState } from "../../store/";
 import styles from "../../styles/TodoList.module.css";
 import { TodoItem } from "./TodoItem";
 import { TodoListProps } from "../Interfaces/TodoInterfaces";
-import { deleteTodo, reorderTodos } from "../../store/todoSlice";
+import { delTodo, fetchTodos, reorderTodos } from "../../store/todoSlice";
+
 import {
   PriorityFilter,
   ProcessFilter,
   SortStatuses,
 } from "../SortFilters/Filters";
 import SearchForm from "../Search/SearchForm";
+import { useAppDispatch } from "../../App";
 
 const TodoList: React.FC<TodoListProps> = ({
   priorityFilter,
@@ -18,16 +20,18 @@ const TodoList: React.FC<TodoListProps> = ({
   processFilterValue,
 }) => {
   const [searchValue, setSearchValue] = useState("");
+  const { status, error } = useSelector((state: RootState) => state.todos);
   const todos = useSelector((state: RootState) => state.todos.todos);
-  const dispatch = useDispatch();
+
+  const dispatch = useAppDispatch();
 
   const deleteTodos = (id: number) => {
-    dispatch(
-      deleteTodo({
-        id: id,
-      })
-    );
+    dispatch(delTodo(id));
   };
+
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, [dispatch]);
 
   const filteredTasks = todos
     .filter((todo) => {
@@ -90,7 +94,6 @@ const TodoList: React.FC<TodoListProps> = ({
     document.querySelectorAll(`.${styles.dragOver}`).forEach((el) => {
       el.classList.remove(styles.dragOver);
     });
-   
   };
   const handleDragEnd = (e: React.DragEvent<HTMLLIElement>) => {
     e.currentTarget.classList.remove(styles.dragged);
@@ -100,17 +103,21 @@ const TodoList: React.FC<TodoListProps> = ({
     <>
       <SearchForm searchValue={searchValue} setSearchValue={setSearchValue} />
       <ul className={styles.listSpace}>
-        {filteredTasks.length === 0 && <h3>Задач нет</h3>}
+        {status === "loading" && <h3>Загрузка...</h3>}
+        {error && <h3>Ошибка: {error}</h3>}
+        {status === "resolved" && filteredTasks.length === 0 && (
+          <h3>Задач нет</h3>
+        )}
         {filteredTasks.map((todo) => (
           <TodoItem
-            key={todo.id}
+            key={todo._id}
             handleDragStart={handleDragStart}
             handleDragOver={handleDragOver}
             handleDrop={handleDrop}
             handleDragEnd={handleDragEnd}
             todo={todo}
             todos={todos}
-            todoId={todo.id}
+            todoId={todo._id}
             deleteTodo={deleteTodos}
           />
         ))}

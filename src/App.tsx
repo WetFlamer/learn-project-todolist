@@ -6,8 +6,12 @@ import Header from "./Components/Header/Header";
 import { TaskFilter } from "./Components/SortFilters/TaskFilter";
 import { useTheme } from "./Components/hooks/useTheme";
 import { useEffect } from "react";
+import { AppDispatch } from "./store";
+import { useDispatch } from "react-redux";
+export const useAppDispatch = () => useDispatch<AppDispatch>();
 
 export function App() {
+
   const {
     sort,
     setSort,

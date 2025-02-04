@@ -8,9 +8,9 @@ import TaskCategoryBadge from "../Task/TaskCategoryBadge";
 import TaskDeadline from "../Task/TaskDeadline";
 import TaskCompletedTime from "../Task/TaskCompletedTime";
 import { TodoEditModal } from "../TodoModals/TodoEditModal";
-import { useDispatch } from "react-redux";
-import { changeCheckBox } from "../../store/todoSlice";
+import { toggleStatus } from "../../store/todoSlice";
 import { FaTrash, FaEdit } from "react-icons/fa";
+import { useAppDispatch } from "../../App";
 
 export const TodoItem: React.FC<TodoItemProps> = ({
   todo,
@@ -27,32 +27,29 @@ export const TodoItem: React.FC<TodoItemProps> = ({
     todo.priority as PriorityFilter
   );
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const checkboxTodo = (id: number) => {
-    dispatch(
-      changeCheckBox({
-        id: id,
-      })
-    );
+    dispatch(toggleStatus(id));
   };
+  
 
   return (
     <>
       <li
         className={`${styles.todoItem}`}
-        key={todo.id}
+        key={todo._id}
         draggable
-        onDragStart={(e) => handleDragStart(todo.id, e)}
+        onDragStart={(e) => handleDragStart(todo._id, e)}
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
-        onDrop={(e) => handleDrop(todo.id, e)}
+        onDrop={(e) => handleDrop(todo._id, e)}
       >
         <div className={styles.todoContent}>
           <input
             type="checkbox"
             checked={todo.completed}
-            onChange={() => checkboxTodo(todo.id)}
+            onChange={() => checkboxTodo(todo._id)}
           />
           <div className={styles.taskInfo}>
             <span className={styles.taskTitle}>{todo.title}</span>
@@ -77,13 +74,13 @@ export const TodoItem: React.FC<TodoItemProps> = ({
           />
           <Button
             icon={FaTrash}
-            onClick={() => deleteTodo(todo.id)}
+            onClick={() => deleteTodo(todo._id)}
             variant="icon"
           />
           <Button
             icon={FaEdit}
             onClick={() => {
-              setEditingId(todo.id);
+              setEditingId(todo._id);
               setIsModalOpen(true);
             }}
             variant="icon"

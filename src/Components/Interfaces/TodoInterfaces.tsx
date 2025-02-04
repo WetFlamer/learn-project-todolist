@@ -6,7 +6,7 @@ import {
 
 export interface Todo {
   date: number;
-  id: number;
+  _id: number;
   title: string;
   completed: boolean;
   priority: string;

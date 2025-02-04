@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { TodoModalProps } from "../Interfaces/TodoInterfaces";
 import { PriorityFilter } from "../SortFilters/Filters";
 import styles from "../../styles/Modal.module.css";
-import { useDispatch } from "react-redux";
-import { handleEditTodo } from "../../store/todoSlice";
+import { editTodo } from "../../store/todoSlice";
+import { useAppDispatch } from "../../App";
 
 export const TodoEditModal: React.FC<TodoModalProps> = ({
   setIsModalOpen,
@@ -15,13 +15,13 @@ export const TodoEditModal: React.FC<TodoModalProps> = ({
   );
   const [deadline, setDeadline] = useState(todo.deadline || "");
   const [category, setCategory] = useState(todo.category);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleEdit = () => {
     if (todoTitle.trim().length > 0) {
       dispatch(
-        handleEditTodo({
-          id: todo.id,
+        editTodo({
+          id: todo._id,
           title: todoTitle,
           priority: modalPriority,
           deadline: deadline,
